@@ -39,7 +39,12 @@ public class Rect extends Shape{
     }
     
     public String toString(){
-        String strr = ("CIRCLE\n"+"Width x Height: "+w+" x "+h+"\nX , Y:"+x+" , "+y+"\nArea: "+area());
+        String strr = ("RECTANGLE\n"+"\nWidth x Height: "+w+" x "+h+"\n"+"Perimiter: "+this.perimiter()+super.toString());
         return (strr);
+    }
+
+    @Override
+    public double perimiter() {
+        return w*h;
     }
 }

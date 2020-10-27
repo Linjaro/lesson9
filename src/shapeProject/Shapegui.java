@@ -11,12 +11,13 @@ public class Shapegui extends javax.swing.JFrame {
     Pen p;
     SketchPadWindow spw;
     Shape s;
+
     public Shapegui() {
         initComponents();
-        spw = new SketchPadWindow(400,400);
-        spw.setLocation(0,290);
+        spw = new SketchPadWindow(400, 400);
+        spw.setLocation(0, 290);
         p = new StandardPen(spw);
-        s = new Circle(0,0,0);        
+        s = new Circle(0, 0, 0);
     }
 
     @SuppressWarnings("unchecked")
@@ -122,6 +123,11 @@ public class Shapegui extends javax.swing.JFrame {
         });
 
         btnQuit.setText("Quit");
+        btnQuit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -200,58 +206,67 @@ public class Shapegui extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCActionPerformed
-        
+
         erase();
-        s=new Circle(100,100,50);
-        
+        s = new Circle(0, 0, 50);
+
         s.draw(p);
-        txtData.setText(s+"");
-        
+        txtData.setText(s + "");
+
     }//GEN-LAST:event_btnCActionPerformed
 
     private void btnWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWActionPerformed
         erase();
-        s=new Wheel(0,0,50,6);
-        
+        s = new Wheel(0, 0, 50, 6);
+
         s.draw(p);
-        txtData.setText(s+"");
+        txtData.setText(s + "");
     }//GEN-LAST:event_btnWActionPerformed
 
     private void btnRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRActionPerformed
         erase();
-        s=new Rect(0,0,50,50);
-        
+        s = new Rect(0, 0, 50, 50);
+
         s.draw(p);
-        txtData.setText(s+"");
+        txtData.setText(s + "");
     }//GEN-LAST:event_btnRActionPerformed
 
     private void btnTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTActionPerformed
         erase();
-        s=new Triangle(0,0,50,50,100,0);
-        
+        s = new Triangle(0, 0, 50, 50, 100, 0);
+
         s.draw(p);
-        txtData.setText(s+"");
+        txtData.setText(s + "");
     }//GEN-LAST:event_btnTActionPerformed
-    
-    private void erase(){
+
+    private void erase() {
         p.setColor(Color.white);
         s.draw(p);
         p.setColor(Color.blue);
     }
-    
+
     private void btnMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveActionPerformed
-        double x = Double.parseDouble(JOptionPane.showInputDialog(this,"Enter new x","0"));
-        double y = Double.parseDouble(JOptionPane.showInputDialog(this,"Enter new y","0"));
+        double x = Double.parseDouble(JOptionPane.showInputDialog(this, "Enter new x", "0"));
+        double y = Double.parseDouble(JOptionPane.showInputDialog(this, "Enter new y", "0"));
         erase();
         s.move(x, y);
         s.draw(p);
-        txtData.setText(s+"");
+        txtData.setText(s + "");
     }//GEN-LAST:event_btnMoveActionPerformed
 
     private void btnResizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResizeActionPerformed
-        erase
+        double x = Double.parseDouble(JOptionPane.showInputDialog(this, "Enter factor for scaling", "0"));
+        erase();
+
+        s.stretchBy(x);
+        s.draw(p);
+        txtData.setText(s + "");
     }//GEN-LAST:event_btnResizeActionPerformed
-   
+
+    private void btnQuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnQuitActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -276,7 +291,6 @@ public class Shapegui extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Shapegui().setVisible(true);

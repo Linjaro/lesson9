@@ -14,6 +14,7 @@ public abstract class Shape {
     
     abstract public double area();
     abstract public void draw(Pen p);
+    abstract public double perimiter();
     final public double getXPos() {
         return x;
     }

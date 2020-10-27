@@ -52,6 +52,11 @@ public class Circle extends Shape{
     }
     
     public String toString(){
-        return ("CIRCLE\n"+"Radius: "+r+super.toString());
+        return ("CIRCLE\n"+"Radius: "+r+"\nPerimiter: "+this.perimiter()+super.toString());
+    }
+
+    @Override
+    public double perimiter() {
+        return 2*Math.PI*r;
     }
 }

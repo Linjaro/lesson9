@@ -36,6 +36,7 @@ public class Triangle extends Shape{
         p.move(x3,y3);
         p.move(x, y);
     }
+    @Override
     public double perimiter(){
         return (Math.sqrt((x-x2)*(x-x2) + (y-y2) * (y-y2))+Math.sqrt((x2-x3)*(x2-x3) + (y2-y3) * (y2-y3))+Math.sqrt((x3-x)*(x3-x) + (y3-y) * (y3-y)));
     }
@@ -45,7 +46,7 @@ public class Triangle extends Shape{
         x2= (x2-x) * factor + x;
         x3= (x3-x) * factor + x;
         y2= (y2-y) * factor + y;
-        y3= (y3-x) * factor + y;
+        y3= (y3-y) * factor + y;
         
     }
     @Override 
@@ -58,5 +59,9 @@ public class Triangle extends Shape{
         y +=diffy;
         y2 +=diffy;
         y3 +=diffy;
+    }
+    @Override 
+    public String toString(){
+    return ("Triangle\n" +"Perimiter: " + this.perimiter()+ "\n"+super.toString() );
     }
 }
