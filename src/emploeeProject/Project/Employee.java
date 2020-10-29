@@ -33,7 +33,7 @@ abstract public class Employee {
     }
 
     public static String getHoursRules() {
-        return "between "+MIN_HOUR+" and "+MIN_HOUR+", inclusive";
+        return "between "+MIN_HOUR+" and "+MAX_HOUR+", inclusive";
     }
     
     public static double getTotalPay(){

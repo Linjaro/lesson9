@@ -51,6 +51,6 @@ public class Wheel extends Circle{
     }
     
     public String toString(){
-        return ("WHEEL\n"+"Radius: "+r+"\n# of Spokes:" +spokes+"\nPerimiter: "+super.perimiter()+"\n"+"\nX , Y:"+x+" , "+y+"Area: "+area());
+        return ("WHEEL\n"+"Radius: "+r+"\n# of Spokes:" +spokes+"\nPerimiter: "+super.perimiter()+"\nX , Y: "+x+" , "+y+"\nArea: "+area());
     }
 }

@@ -9,14 +9,12 @@ package emploeeProject.Project;
  *
  * @author moha7150
  */
-public class FTEmployee extends Employee{
+public class PTEmployee extends Employee{
 
     @Override
     public double getPay() {
-            double pay = rate * 40 + (hours - 40) * (rate * 2);
+            double pay = rate*hours;
             totalPay += pay;
             return pay;
     }
-    
-    
 }

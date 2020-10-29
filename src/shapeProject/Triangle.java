@@ -62,6 +62,6 @@ public class Triangle extends Shape{
     }
     @Override 
     public String toString(){
-    return ("Triangle\n" +"Perimiter: " + this.perimiter()+ "\n"+super.toString() );
+    return ("Triangle\n" +"Perimiter: " + this.perimiter()+ "\nX1, Y1, X2, Y2, X3, Y3 :\n"+x+" , "+y+" , "+x2+" , "+y2+" , "+ x3+" , "+y3+ "\nArea: "+this.area());
     }
 }

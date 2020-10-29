@@ -1,15 +1,20 @@
-
 package emploeeProject.Project;
 
+import java.text.NumberFormat;
+import javax.swing.JOptionPane;
 
 public class employeeform extends javax.swing.JFrame {
-    
-    
+
+    Employee emp[];
+    int size = 0;
+    NumberFormat nf;
+
     public employeeform() {
         initComponents();
+        emp = new Employee[10];
+        nf = NumberFormat.getCurrencyInstance();
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -27,10 +32,10 @@ public class employeeform extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         add = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblemp = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lblTot = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Employee Pay List");
@@ -86,7 +91,7 @@ public class employeeform extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblemp.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -103,15 +108,20 @@ public class employeeform extends javax.swing.JFrame {
                 "Names", "Pay"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblemp);
 
         jButton1.setText("Quit");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Total Pay");
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel6.setText("$0.00");
+        lblTot.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblTot.setText("$0.00");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -121,7 +131,7 @@ public class employeeform extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblTot, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
@@ -178,7 +188,7 @@ public class employeeform extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel6))
+                    .addComponent(lblTot))
                 .addGap(31, 31, 31))
         );
 
@@ -186,24 +196,57 @@ public class employeeform extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtHoursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHoursActionPerformed
-        
+
     }//GEN-LAST:event_txtHoursActionPerformed
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
-        try{
-            String choice = buttonGroup1.getSelection().getActionCommand();
-            if (choice.equals("ft")){
-                
-                
-            }else{
-                
-                
-            }
-        }catch(Exception e){
+        Employee temp;
+        String nm, type="";
+        int hours;
+        double rate;
+        try {
+            type = buttonGroup1.getSelection().getActionCommand();
+            nm = txtName.getText();
+            hours = Integer.parseInt(txtHours.getText());
+            rate = Double.parseDouble(txtRate.getText());
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Must fill out form correctly");
+            return;
+        }
+        if (type.equals("ft")) {
+            temp = new FTEmployee();
+        } else {
+            temp = new PTEmployee();
+        }
+        if(temp.setName(nm) && temp.setHours(hours) &&temp.setRate(rate)){
+            emp[size] = temp;
+            tblemp.setValueAt(temp.getName(),size,0);
+            tblemp.setValueAt(temp.getPay(),size,1);
+            size++;
+            lblTot.setText(nf.format(Employee.getTotalPay()));
+            clearform();
+            return;
             
+        }
+        else{
+        String ee = "Error\n=====\n";
+        if(!temp.setName(nm)) ee+="Name: "+ Employee.getNameRules()+"\n";
+        if(!temp.setRate(rate)) ee+="Rate: "+ Employee.getRateRules()+"\n";
+        if(!temp.setHours(hours)) ee+="Hours: "+ Employee.getHoursRules()+"\n";
+        JOptionPane.showMessageDialog(this, ee);
         }
     }//GEN-LAST:event_addActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
+    private void clearform() {
+        txtName.setText("");
+        txtHours.setText("");
+        txtRate.setText("");
+        buttonGroup1.clearSelection();
+    }
     /**
      * @param args the command line arguments
      */
@@ -248,14 +291,18 @@ public class employeeform extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblTot;
+    private javax.swing.JTable tblemp;
     private javax.swing.JTextField txtHours;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtRate;
     // End of variables declaration//GEN-END:variables
+
+    
+
+    
 }

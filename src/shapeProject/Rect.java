@@ -39,7 +39,7 @@ public class Rect extends Shape{
     }
     
     public String toString(){
-        String strr = ("RECTANGLE\n"+"\nWidth x Height: "+w+" x "+h+"\n"+"Perimiter: "+this.perimiter()+super.toString());
+        String strr = ("RECTANGLE"+"\nWidth x Height: "+w+" x "+h+"\n"+"Perimiter: "+this.perimiter()+super.toString());
         return (strr);
     }
 
