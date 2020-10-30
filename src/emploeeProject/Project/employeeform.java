@@ -1,5 +1,8 @@
 package emploeeProject.Project;
 
+import emploeeProject.Project.Employee;
+import emploeeProject.Project.FTEmployee;
+import emploeeProject.Project.PTEmployee;
 import java.text.NumberFormat;
 import javax.swing.JOptionPane;
 

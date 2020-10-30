@@ -1,8 +1,8 @@
 package interfaceEX2;
 
 import TurtleGraphics.Pen;
-
-public interface Shape {
+public interface Shape 
+{
     public double area();
     public void draw(Pen p);
     public double getXPos();
